@@ -3,7 +3,7 @@ import os
 
 dsbox_path = '/Users/mayankkejriwal/datasets/d3m/jan-2018/primitives_repo/'
 
-def serialize_paths_jsons(input_folder = dsbox_path+'v2017.12.27', output = dsbox_path+'v2017.12.27.jl'):
+def serialize_paths_jsons(input_folder = dsbox_path+'v2018.1.5', output = dsbox_path+'v2018.1.5.jl'):
     # files = glob.glob(input_folder)
     folders1 = [x[0] for x in os.walk(input_folder)]
     out = codecs.open(output, 'w')
@@ -89,13 +89,24 @@ def prefix_clustering(primitives_file=dsbox_path+'primitives.jl', output_file=ds
             #the next if do it's thing subsequently.
             if len(algorithm_types) > 1:
                 multi_algorithm_types += 1
-                if 'd3m.primitives.d3metafeatureextraction.D3MetafeatureExtraction' in k and 'v2018.1.5' in k:
+                if 'd3m.primitives.d3metafeatureextraction.D3MetafeatureExtraction' in k: # in the latest pull occurs in both 2018.1.5 and 2018.1.26
                     algorithm_types = [u'DATA_PROFILING']
-                elif 'd3m.primitives.cmu.autonlab.find_projections.Search' in k and 'v2018.1.5' in k:
+                elif 'd3m.primitives.datasmash' in k and 'v2018.1.26' in k:
+                    algorithm_types = [u'HIDDEN_MARKOV_MODEL']
+                elif 'd3m.primitives.cmu.autonlab.find_projections.Search' in k and 'v2018.1.26' in k:
                     algorithm_types = [u'DECISION_TREE']
-                elif 'd3m.primitives.dsbox.KnnImputation' in k and 'v2018.1.5' in k:
+                elif 'd3m.primitives.corex_text.CorexText' in k and 'v2018.1.5' in k:
+                    algorithm_types = [u'LATENT_DIRICHLET_ALLOCATION']
+                elif 'd3m.primitives.dsbox.KnnImputation' in k: # in the latest pull occurs in both 2018.1.5 and 2018.1.26
                     algorithm_types = [u'IMPUTATION']
+                elif 'd3m.primitives.test.RandomPrimitive' in k and 'v2018.1.26' in k: # in the latest pull occurs in both 2018.1.5 and 2018.1.26
+                    algorithm_types = [u'NORMAL_DISTRIBUTION']
+                elif 'd3m.primitives.spider.featurization.AudioFeaturization' in k and 'v2018.1.26' in k: # in the latest pull occurs in both 2018.1.5 and 2018.1.26
+                    algorithm_types = [u'INFORMATION_ENTROPY']
+                elif 'd3m.primitives.spider.distance.RFD' in k and 'v2018.1.26' in k: # in the latest pull occurs in both 2018.1.5 and 2018.1.26
+                    algorithm_types = [u'RANDOM_FOREST']
                 else:
+                    print line
                     raise Exception
 
             if primitive_family not in answer['PrimitivesOntology']:
@@ -143,5 +154,5 @@ def serialize_sklearn_primitives_to_skeleton_json(sklearn_text=dsbox_path+'sklea
 # serialize_sklearn_primitives_to_skeleton_json()
 # serialize_paths_jsons()
 # print_paths_with_multi_algorithm_types()
-prefix_clustering()
+# prefix_clustering()
 # serialize_paths_jsons()
