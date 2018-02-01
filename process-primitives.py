@@ -3,7 +3,7 @@ import os
 
 dsbox_path = '/Users/mayankkejriwal/datasets/d3m/jan-2018/primitives_repo/'
 
-def serialize_paths_jsons(input_folder = dsbox_path+'v2018.1.5', output = dsbox_path+'v2018.1.5.jl'):
+def serialize_paths_jsons(input_folder = dsbox_path+'v2018.1.26', output = dsbox_path+'v2018.1.26.jl'):
     # files = glob.glob(input_folder)
     folders1 = [x[0] for x in os.walk(input_folder)]
     out = codecs.open(output, 'w')
@@ -95,7 +95,7 @@ def prefix_clustering(primitives_file=dsbox_path+'primitives.jl', output_file=ds
                     algorithm_types = [u'HIDDEN_MARKOV_MODEL']
                 elif 'd3m.primitives.cmu.autonlab.find_projections.Search' in k and 'v2018.1.26' in k:
                     algorithm_types = [u'DECISION_TREE']
-                elif 'd3m.primitives.corex_text.CorexText' in k and 'v2018.1.5' in k:
+                elif 'd3m.primitives.corex_text.CorexText' in k: # in the latest pull occurs in both 2018.1.5 and 2018.1.26
                     algorithm_types = [u'LATENT_DIRICHLET_ALLOCATION']
                 elif 'd3m.primitives.dsbox.KnnImputation' in k: # in the latest pull occurs in both 2018.1.5 and 2018.1.26
                     algorithm_types = [u'IMPUTATION']
@@ -154,5 +154,4 @@ def serialize_sklearn_primitives_to_skeleton_json(sklearn_text=dsbox_path+'sklea
 # serialize_sklearn_primitives_to_skeleton_json()
 # serialize_paths_jsons()
 # print_paths_with_multi_algorithm_types()
-# prefix_clustering()
-# serialize_paths_jsons()
+prefix_clustering()
